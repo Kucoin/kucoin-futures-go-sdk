@@ -18,7 +18,7 @@ import (
 
 var (
 	// Version is SDK version.
-	Version = "1.0.4"
+	Version = "1.0.0"
 	// DebugMode will record the logs of API and WebSocket to files in the directory "kumex.LogDirectory" according to the minimum log level "kumex.LogLevel".
 	DebugMode = os.Getenv("API_DEBUG_MODE") == "1"
 )

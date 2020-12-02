@@ -1,18 +1,18 @@
 # Go SDK for KuMex API
-> The detailed document [https://docs.kumex.com](https://docs.kumex.com), in order to receive the latest API change notifications, please `Watch` this repository.
+> The detailed document [https://docs.kucoin.com/futures](https://docs.kucoin.com/futures), in order to receive the latest API change notifications, please `Watch` this repository.
 
-[![Latest Version](https://img.shields.io/github/release/Kucoin/kumex-go-sdk.svg)](https://github.com/Kucoin/kumex-go-sdk/releases)
-[![GoDoc](https://godoc.org/github.com/Kucoin/kumex-go-sdk?status.svg)](https://godoc.org/github.com/Kucoin/kumex-go-sdk)
-[![Build Status](https://travis-ci.org/Kucoin/kumex-go-sdk.svg?branch=master)](https://travis-ci.org/Kucoin/kumex-go-sdk)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Kucoin/kumex-go-sdk)](https://goreportcard.com/report/github.com/Kucoin/kumex-go-sdk)
-[![Sourcegraph](https://sourcegraph.com/github.com/Kucoin/kumex-go-sdk/-/badge.svg)](https://sourcegraph.com/github.com/Kucoin/kumex-go-sdk?badge)
-<!-- [![Total Lines](https://tokei.rs/b1/github/Kucoin/kumex-go-sdk)](https://github.com/Kucoin/kumex-go-sdk) -->
+[![Latest Version](https://img.shields.io/github/release/Kucoin/kucoin-futures-go-sdk.svg)](https://github.com/Kucoin/kucoin-futures-go-sdk/releases)
+[![GoDoc](https://godoc.org/github.com/Kucoin/kucoin-futures-go-sdk?status.svg)](https://godoc.org/github.com/Kucoin/kucoin-futures-go-sdk)
+[![Build Status](https://travis-ci.org/Kucoin/kucoin-futures-go-sdk.svg?branch=master)](https://travis-ci.org/Kucoin/kucoin-futures-go-sdk)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Kucoin/kucoin-futures-go-sdk)](https://goreportcard.com/report/github.com/Kucoin/kucoin-futures-go-sdk)
+[![Sourcegraph](https://sourcegraph.com/github.com/Kucoin/kucoin-futures-go-sdk/-/badge.svg)](https://sourcegraph.com/github.com/Kucoin/kucoin-futures-go-sdk?badge)
+<!-- [![Total Lines](https://tokei.rs/b1/github/Kucoin/kucoin-futures-go-sdk)](https://github.com/Kucoin/kucoin-futures-go-sdk) -->
 
 
 ## Install
 
 ```bash
-go get github.com/Kucoin/kumex-go-sdk
+go get github.com/Kucoin/kucoin-futures-go-sdk
 ```
 
 ## Usage
@@ -21,14 +21,14 @@ go get github.com/Kucoin/kumex-go-sdk
 
 | Environment | BaseUri |
 | -------- | -------- |
-| *Production* | `https://api.kumex.com(DEFAULT)` `https://api.kumex.top` |
-| *Sandbox* | `https://sandbox-api.kumex.com` |
+| *Production* | `https://api-futures.kucoin.com(DEFAULT)` `https://api-futures.kucoin.cc` |
+| *Sandbox* | `https://api-sandbox-futures.kucoin.com` |
 
 ### Create ApiService
 
 ```go
 s := kumex.NewApiService( 
-	// kumex.ApiBaseURIOption("https://api.kumex.com"), 
+	// kumex.ApiBaseURIOption("https://api-futures.kucoin.com"), 
 	kumex.ApiKeyOption("key"),
 	kumex.ApiSecretOption("secret"),
 	kumex.ApiPassPhraseOption("passphrase"),
@@ -36,7 +36,7 @@ s := kumex.NewApiService(
 
 // Or add these options into the environmental variable
 // Bash: 
-// export API_BASE_URI=https://api.kumex.com
+// export API_BASE_URI=https://api-futures.kucoin.com
 // export API_KEY=key
 // export API_SECRET=secret
 // export API_PASSPHRASE=passphrase
@@ -208,8 +208,8 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.AccountOverview() | YES | https://docs.kumex.com/#get-account-overview |
-| ApiService.TransactionHistory() | YES | https://docs.kumex.com/#get-transaction-history |
+| ApiService.AccountOverview() | YES | https://docs.kucoin.com/futures/#get-account-overview |
+| ApiService.TransactionHistory() | YES | https://docs.kucoin.com/futures/#get-transaction-history |
 
 </details>
 
@@ -218,8 +218,8 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.DepositAddresses() | YES | https://docs.kumex.com/#get-deposit-address |
-| ApiService.Deposits() | YES | https://docs.kumex.com/#get-deposit-list |
+| ApiService.DepositAddresses() | YES | https://docs.kucoin.com/futures/#get-deposit-address |
+| ApiService.Deposits() | YES | https://docs.kucoin.com/futures/#get-deposit-list |
 
 </details>
 
@@ -228,10 +228,10 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.WithdrawalQuotas() | YES | https://docs.kumex.com/#get-withdrawal-quotas |
-| ApiService.ApplyWithdrawal() | YES | https://docs.kumex.com/#apply-withdraw |
-| ApiService.Withdrawals() | YES | https://docs.kumex.com/#get-withdrawals-list |
-| ApiService.CancelWithdrawal() | YES | https://docs.kumex.com/#cancel-withdrawal |
+| ApiService.WithdrawalQuotas() | YES | https://docs.kucoin.com/futures/#get-withdrawal-quotas |
+| ApiService.ApplyWithdrawal() | YES | https://docs.kucoin.com/futures/#apply-withdraw |
+| ApiService.Withdrawals() | YES | https://docs.kucoin.com/futures/#get-withdrawals-list |
+| ApiService.CancelWithdrawal() | YES | https://docs.kucoin.com/futures/#cancel-withdrawal |
 
 </details>
 
@@ -240,10 +240,10 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.TransferOut() | YES | https://docs.kumex.com/#transfer-out |
-| ApiService.TransferOutV2() | YES | https://docs.kumex.com/#transfer-funds-to-kucoin-main-account |
-| ApiService.TransferList() | YES | https://docs.kumex.com/#get-transfer-list |
-| ApiService.CancelTransfer() | YES | https://docs.kumex.com/#cancel-transfer |
+| ApiService.TransferOut() | YES | https://docs.kucoin.com/futures/#transfer-out |
+| ApiService.TransferOutV2() | YES | https://docs.kucoin.com/futures/#transfer-funds-to-kucoin-main-account |
+| ApiService.TransferList() | YES | https://docs.kucoin.com/futures/#get-transfer-list |
+| ApiService.CancelTransfer() | YES | https://docs.kucoin.com/futures/#cancel-transfer |
 
 </details>
 
@@ -252,9 +252,9 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.Fills() | YES | https://docs.kumex.com/#list-fills |
-| ApiService.RecentFills() | YES | https://docs.kumex.com/#recent-fills |
-| ApiService.openOrderStatistics() | YES | https://docs.kumex.com/#open-order-statistics |
+| ApiService.Fills() | YES | https://docs.kucoin.com/futures/#list-fills |
+| ApiService.RecentFills() | YES | https://docs.kucoin.com/futures/#recent-fills |
+| ApiService.openOrderStatistics() | YES | https://docs.kucoin.com/futures/#open-order-statistics |
 
 </details>
 
@@ -263,13 +263,13 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.CreateOrder() | YES | https://docs.kumex.com/#place-a-new-order |
-| ApiService.CancelOrder() | YES | https://docs.kumex.com/#cancel-an-order |
-| ApiService.CancelOrders() | YES | https://docs.kumex.com/#cancel-all-orders |
-| ApiService.StopOrders() | YES | https://docs.kumex.com/#get-untriggered-stop-order-list |
-| ApiService.Orders() | YES | https://docs.kumex.com/#list-orders |
-| ApiService.Order() | YES | https://docs.kumex.com/#get-an-order |
-| ApiService.RecentOrders() | YES | https://docs.kumex.com/#recent-orders |
+| ApiService.CreateOrder() | YES | https://docs.kucoin.com/futures/#place-a-new-order |
+| ApiService.CancelOrder() | YES | https://docs.kucoin.com/futures/#cancel-an-order |
+| ApiService.CancelOrders() | YES | https://docs.kucoin.com/futures/#cancel-all-orders |
+| ApiService.StopOrders() | YES | https://docs.kucoin.com/futures/#get-untriggered-stop-order-list |
+| ApiService.Orders() | YES | https://docs.kucoin.com/futures/#list-orders |
+| ApiService.Order() | YES | https://docs.kucoin.com/futures/#get-an-order |
+| ApiService.RecentOrders() | YES | https://docs.kucoin.com/futures/#recent-orders |
 
 </details>
 
@@ -278,17 +278,17 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.Ticker() | NO | https://docs.kumex.com/#get-real-time-ticker |
-| ApiService.Level2Snapshot() | NO | https://docs.kumex.com/#get-full-order-book-level-2 |
-| ApiService.Level2MessageQuery()() | NO | https://docs.kumex.com/#level-2-pulling-messages |
-| ApiService.Level3Snapshot() | NO | https://docs.kumex.com/#get-full-order-book-level-3 |
-| ApiService.Level3MessageQuery() | NO | https://docs.kumex.com/#level-3-pulling-messages|
-| ApiService.TradeHistory() | NO | https://docs.kumex.com/#transaction-history |
-| ApiService.InterestQuery() | NO | https://docs.kumex.com/#get-interest-rate-list |
-| ApiService.IndexQuery() | NO | https://docs.kumex.com/#get-index-list |
-| ApiService.MarkPrice() | NO | https://docs.kumex.com/#get-current-mark-price |
-| ApiService.PremiumQuery() | NO | https://docs.kumex.com/#get-premium-index |
-| ApiService.FundingRate() | NO | https://docs.kumex.com/#get-current-funding-rate |
+| ApiService.Ticker() | NO | https://docs.kucoin.com/futures/#get-real-time-ticker |
+| ApiService.Level2Snapshot() | NO | https://docs.kucoin.com/futures/#get-full-order-book-level-2 |
+| ApiService.Level2MessageQuery()() | NO | https://docs.kucoin.com/futures/#level-2-pulling-messages |
+| ApiService.Level3Snapshot() | NO | https://docs.kucoin.com/futures/#get-full-order-book-level-3 |
+| ApiService.Level3MessageQuery() | NO | https://docs.kucoin.com/futures/#level-3-pulling-messages|
+| ApiService.TradeHistory() | NO | https://docs.kucoin.com/futures/#transaction-history |
+| ApiService.InterestQuery() | NO | https://docs.kucoin.com/futures/#get-interest-rate-list |
+| ApiService.IndexQuery() | NO | https://docs.kucoin.com/futures/#get-index-list |
+| ApiService.MarkPrice() | NO | https://docs.kucoin.com/futures/#get-current-mark-price |
+| ApiService.PremiumQuery() | NO | https://docs.kucoin.com/futures/#get-premium-index |
+| ApiService.FundingRate() | NO | https://docs.kucoin.com/futures/#get-current-funding-rate |
 
 </details>
 
@@ -297,8 +297,8 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.ActiveContracts() | NO | https://docs.kumex.com/#get-open-contract-list |
-| ApiService.Contracts() | NO | https://docs.kumex.com/#get-order-info-of-the-contract |
+| ApiService.ActiveContracts() | NO | https://docs.kucoin.com/futures/#get-open-contract-list |
+| ApiService.Contracts() | NO | https://docs.kucoin.com/futures/#get-order-info-of-the-contract |
 
 </details>
 
@@ -307,9 +307,9 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.WebSocketPublicToken() | NO | https://docs.kumex.com/#apply-connect-token |
-| ApiService.WebSocketPrivateToken() | YES | https://docs.kumex.com/#apply-connect-token |
-| ApiService.NewWebSocketClient() | - | https://docs.kumex.com/#websocket-feed |
+| ApiService.WebSocketPublicToken() | NO | https://docs.kucoin.com/futures/#apply-connect-token |
+| ApiService.WebSocketPrivateToken() | YES | https://docs.kucoin.com/futures/#apply-connect-token |
+| ApiService.NewWebSocketClient() | - | https://docs.kucoin.com/futures/#websocket-feed |
 
 </details>
 
@@ -318,7 +318,7 @@ for {
 
 | API | Authentication | Description |
 | -------- | -------- | -------- |
-| ApiService.ServerTime() | NO | https://docs.kumex.com/#server-time |
+| ApiService.ServerTime() | NO | https://docs.kucoin.com/futures/#server-time |
 
 </details>
 
@@ -326,7 +326,7 @@ for {
 
 ```shell
 # Add your API configuration items into the environmental variable first
-export API_BASE_URI=https://api.kumex.com
+export API_BASE_URI=https://api-futures.kucoin.com
 export API_KEY=key
 export API_SECRET=secret
 export API_PASSPHRASE=passphrase

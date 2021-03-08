@@ -26,12 +26,26 @@ go get github.com/Kucoin/kucoin-futures-go-sdk
 
 ### Create ApiService
 
+###### **Note** 
+To reinforce the security of the API, KuCoin upgraded the API key to version 2.0, the validation logic has also been changed. It is recommended to create(https://www.kucoin.com/account/api) and update your API key to version 2.0. 
+The API key of version 1.0 will be still valid until May 1, 2021.
+
 ```go
-s := kumex.NewApiService( 
-	// kumex.ApiBaseURIOption("https://api-futures.kucoin.com"), 
-	kumex.ApiKeyOption("key"),
-	kumex.ApiSecretOption("secret"),
-	kumex.ApiPassPhraseOption("passphrase"),
+// API key version 2.0
+s :=  kucoin.NewApiService( 
+	// kucoin.ApiBaseURIOption("https://api.kucoin.com"), 
+	kucoin.ApiKeyOption("key"),
+	kucoin.ApiSecretOption("secret"),
+	kucoin.ApiPassPhraseOption("passphrase"),
+	kucoin.ApiKeyVersionOption(ApiKeyVersionV2)
+)
+
+// API key version 1.0
+s := kucoin.NewApiService( 
+	// kucoin.ApiBaseURIOption("https://api.kucoin.com"), 
+	kucoin.ApiKeyOption("key"),
+	kucoin.ApiSecretOption("secret"),
+	kucoin.ApiPassPhraseOption("passphrase"), 
 )
 
 // Or add these options into the environmental variable
@@ -330,6 +344,7 @@ export API_BASE_URI=https://api-futures.kucoin.com
 export API_KEY=key
 export API_SECRET=secret
 export API_PASSPHRASE=passphrase
+export API_KEY_VERSION=2
 
 # Run tests
 go test -v

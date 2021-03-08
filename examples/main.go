@@ -9,9 +9,10 @@ import (
 func main() {
 	//s := kumex.NewApiServiceFromEnv()
 	s := kumex.NewApiService(
-		kumex.ApiKeyOption(""),
-		kumex.ApiSecretOption(""),
-		kumex.ApiPassPhraseOption(""),
+		kumex.ApiKeyOption("key"),
+		kumex.ApiSecretOption("secret"),
+		kumex.ApiPassPhraseOption("passphrase"),
+		kumex.ApiKeyVersionOption("1"),
 	)
 	serverTime(s)
 	accounts(s)

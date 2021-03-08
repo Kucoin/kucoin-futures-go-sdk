@@ -12,7 +12,7 @@ func main() {
 		kumex.ApiKeyOption("key"),
 		kumex.ApiSecretOption("secret"),
 		kumex.ApiPassPhraseOption("passphrase"),
-		kumex.ApiKeyVersionOption("1"),
+		kumex.ApiKeyVersionOption(kumex.ApiKeyVersionV1),
 	)
 	serverTime(s)
 	accounts(s)

@@ -1,4 +1,4 @@
-module github.com/Kucoin/kumex-go-sdk
+module github.com/Kucoin/kucoin-futures-go-sdk
 
 require (
 	github.com/gorilla/websocket v1.4.0

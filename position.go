@@ -42,6 +42,8 @@ type PositionModel struct {
 	LiquidationPrice  string `json:"liquidationPrice"`
 	BankruptPrice     string `json:"bankruptPrice"`
 	SettleCurrency    string `json:"settleCurrency"`
+	MaintainMargin    string `json:"maintainMargin"`
+	RiskLimitLevel    string `json:"riskLimitLevel"`
 }
 
 // Position Get Position Details.

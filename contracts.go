@@ -5,6 +5,8 @@ import "net/http"
 // A ContractsModel is the struct.
 type ContractsModel struct {
 	BaseCurrency       string  `json:"baseCurrency"`
+	QuoteCurrency      string  `json:"quoteCurrency"`
+	SettleCurrency     string  `json:"settleCurrency"`
 	FairMethod         string  `json:"fairMethod"`
 	FundingBaseSymbol  string  `json:"fundingBaseSymbol"`
 	FundingQuoteSymbol string  `json:"fundingQuoteSymbol"`
@@ -24,7 +26,6 @@ type ContractsModel struct {
 	MaxRiskLimit       float32 `json:"maxRiskLimit"`
 	MinRiskLimit       float32 `json:"minRiskLimit"`
 	Multiplier         float32 `json:"multiplier"`
-	QuoteCurrency      string  `json:"quoteCurrency"`
 	RiskStep           int     `json:"riskStep"`
 	RootSymbol         string  `json:"rootSymbol"`
 	Status             string  `json:"status"`
@@ -37,6 +38,11 @@ type ContractsModel struct {
 	VolumeOf24h        float64 `json:"volumeOf24h"`
 	TurnoverOf24h      float64 `json:"turnoverOf24h"`
 	OpenInterest       string  `json:"openInterest"`
+	LastTradePrice     float64 `json:"lastTradePrice"`
+	LowPrice           float64 `json:"lowPrice"`
+	HighPrice          float64 `json:"highPrice"`
+	PriceChgPct        float64 `json:"priceChgPct"`
+	PriceChg           float64 `json:"priceChg"`
 }
 
 type ContractsModels []*ContractsModel

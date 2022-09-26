@@ -31,6 +31,7 @@ type Level2SnapshotModel struct {
 	Sequence int         `json:"sequence"`
 	Asks     [][]float32 `json:"asks"`
 	Bids     [][]float32 `json:"bids"`
+	Ts       int64       `json:"ts"`
 }
 
 // Level2Snapshot Get Full Order Book - Level 2.

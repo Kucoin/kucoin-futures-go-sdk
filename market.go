@@ -29,8 +29,8 @@ func (as *ApiService) Ticker(symbol string) (*ApiResponse, error) {
 type Level2SnapshotModel struct {
 	Symbol   string      `json:"symbol"`
 	Sequence int         `json:"sequence"`
-	Asks     [][]float32 `json:"asks"`
-	Bids     [][]float32 `json:"bids"`
+	Asks     [][]float64 `json:"asks"`
+	Bids     [][]float64 `json:"bids"`
 	Ts       int64       `json:"ts"`
 }
 

@@ -19,6 +19,7 @@ type WithdrawalQuotasModel struct {
 }
 
 // WithdrawalQuotas returns the quotas of withdrawal.
+// Deprecated
 func (as *ApiService) WithdrawalQuotas(currency string) (*ApiResponse, error) {
 	params := map[string]string{"currency": currency}
 	req := NewRequest(http.MethodGet, "/api/v1/withdrawals/quotas", params)
@@ -31,6 +32,7 @@ type ApplyWithdrawalResultModel struct {
 }
 
 // ApplyWithdrawal applies a withdrawal.
+// Deprecated
 func (as *ApiService) ApplyWithdrawal(currency, address, amount string, options map[string]string) (*ApiResponse, error) {
 	p := map[string]string{
 		"currency": currency,
@@ -64,6 +66,7 @@ type WithdrawalModel struct {
 type WithdrawalsModel []*WithdrawalModel
 
 // Withdrawals returns a list of withdrawals.
+// Deprecated
 func (as *ApiService) Withdrawals(params map[string]string, pagination *PaginationParam) (*ApiResponse, error) {
 	pagination.ReadParam(params)
 	req := NewRequest(http.MethodGet, "/api/v1/withdrawal-list", params)
@@ -76,6 +79,7 @@ type CancelWithdrawalResultModel struct {
 }
 
 // CancelWithdrawal cancels a withdrawal by withdrawalId.
+// Deprecated
 func (as *ApiService) CancelWithdrawal(withdrawalId string) (*ApiResponse, error) {
 	req := NewRequest(http.MethodDelete, "/api/v1/withdrawals/"+withdrawalId, nil)
 	return as.Call(req)

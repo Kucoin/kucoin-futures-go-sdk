@@ -179,13 +179,46 @@ func TestApiService_OrderByClientOid(t *testing.T) {
 
 func TestApiService_RecentOrders(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.RecentDoneOrders()
+	rsp, err := s.RecentDoneOrders("MATIC-USDT")
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	os := OrdersModel{}
 	if err := rsp.ReadData(&os); err != nil {
+		t.Fatal(err)
+	}
+	for _, o := range os {
+		t.Log(ToJsonString(o))
+		switch {
+		case o.Id == "":
+			t.Error("Empty key 'id'")
+		case o.Symbol == "":
+			t.Error("Empty key 'symbol'")
+		case o.Type == "":
+			t.Error("Empty key 'type'")
+		case o.Side == "":
+			t.Error("Empty key 'side'")
+		case o.SettleCurrency == "":
+			t.Error("Empty key 'settleCurrency'")
+		case o.Status == "":
+			t.Error("Empty key 'status'")
+		case o.UpdatedAt == 0:
+			t.Error("Empty key 'UpdatedAt'")
+		}
+	}
+}
+
+func TestApiService_StopOrders(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	p := &PaginationParam{CurrentPage: 1, PageSize: 10}
+	rsp, err := s.ObtainStopOrders("EDU-USDT", p)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	os := OrdersModel{}
+	if _, err := rsp.ReadPaginationData(&os); err != nil {
 		t.Fatal(err)
 	}
 	for _, o := range os {

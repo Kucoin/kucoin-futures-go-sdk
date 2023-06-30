@@ -15,6 +15,7 @@ type DepositAddressesModel []*DepositAddressModel
 
 // DepositAddresses returns the deposit address of currency for deposit.
 // If return data is empty, you may need create a deposit address first.
+// Deprecated
 func (as *ApiService) DepositAddresses(currency string) (*ApiResponse, error) {
 	params := map[string]string{"currency": currency}
 	req := NewRequest(http.MethodGet, "/api/v1/deposit-addresses", params)
@@ -37,6 +38,7 @@ type DepositModel struct {
 type DepositsModel []*DepositModel
 
 // Deposits returns a list of deposit.
+// Deprecated
 func (as *ApiService) Deposits(params map[string]string, pagination *PaginationParam) (*ApiResponse, error) {
 	pagination.ReadParam(params)
 	req := NewRequest(http.MethodGet, "/api/v1/deposit-list", params)

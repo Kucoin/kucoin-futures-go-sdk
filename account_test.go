@@ -74,3 +74,69 @@ func TestApiService_TransactionHistory(t *testing.T) {
 		}
 	}
 }
+
+func TestApiService_CreateSubApiKey(t *testing.T) {
+	t.SkipNow()
+	s := NewApiServiceFromEnv()
+	p := map[string]string{
+		"subName":    "TestSubAccount1Fen",
+		"passphrase": "123abcABC",
+		"remark":     "re",
+	}
+	rsp, err := s.CreateSubApiKey(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := &CreateSubApiKeyRes{}
+	if err := rsp.ReadData(w); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(w))
+}
+
+func TestApiService_SubApiKeys(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.SubApiKeys("", "TestSubAccount1Fen")
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := SubApiKeysModel{}
+	if err := rsp.ReadData(&w); err != nil {
+		t.Fatal(err)
+	}
+	for _, model := range w {
+		t.Log(ToJsonString(model))
+	}
+}
+
+func TestApiService_ModifySubApiKey(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	p := map[string]string{
+		"subName":    "TestSubAccount1Fen",
+		"apiKey":     "649cfa412b8f770001f5eec1",
+		"passphrase": "123abcABC",
+		"permission": "Trade",
+	}
+	rsp, err := s.ModifySubApiKey(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := &ModifySubApiKeyRes{}
+	if err := rsp.ReadData(w); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(w))
+}
+
+func TestApiService_DeleteSubApiKey(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.DeleteSubApiKey("649cfa412b8f770001f5eec1", "123abcABC", "TestSubAccount1Fen")
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := &DeleteSubApiKeyRes{}
+	if err := rsp.ReadData(w); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(w))
+}

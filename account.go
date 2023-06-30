@@ -1,6 +1,7 @@
 package kumex
 
 import (
+	"encoding/json"
 	"net/http"
 )
 
@@ -49,4 +50,71 @@ func (as *ApiService) TransactionHistory(params map[string]string, pagination *P
 	pagination.ReadParam(params)
 	req := NewRequest(http.MethodGet, "/api/v1/transaction-history", params)
 	return as.Call(req)
+}
+
+// SubApiKeys This endpoint can be used to obtain a list of Futures APIs pertaining to a sub-account.
+func (as *ApiService) SubApiKeys(apiKey, subName string) (*ApiResponse, error) {
+	p := map[string]string{
+		"apiKey":  apiKey,
+		"subName": subName,
+	}
+	req := NewRequest(http.MethodGet, "/api/v1/sub/api-key", p)
+	return as.Call(req)
+}
+
+type SubApiKeysModel []*SubApiKeyModel
+
+type SubApiKeyModel struct {
+	SubName     string      `json:"subName"`
+	Remark      string      `json:"remark"`
+	ApiKey      string      `json:"apiKey"`
+	Permission  string      `json:"permission"`
+	IpWhitelist string      `json:"ipWhitelist"`
+	CreatedAt   json.Number `json:"createdAt"`
+}
+
+// CreateSubApiKey This endpoint can be used to create Futures APIs for sub-accounts.
+func (as *ApiService) CreateSubApiKey(p map[string]string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v1/sub/api-key", p)
+	return as.Call(req)
+}
+
+type CreateSubApiKeyRes struct {
+	SubName     string      `json:"subName"`
+	Remark      string      `json:"remark"`
+	ApiKey      string      `json:"apiKey"`
+	Permission  string      `json:"permission"`
+	IpWhitelist string      `json:"ipWhitelist"`
+	CreatedAt   json.Number `json:"createdAt"`
+	ApiSecret   string      `json:"apiSecret"`
+	Passphrase  string      `json:"passphrase"`
+}
+
+// ModifySubApiKey TThis endpoint can be used to modify sub-account Futures APIs.
+func (as *ApiService) ModifySubApiKey(p map[string]string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v1/sub/api-key/update", p)
+	return as.Call(req)
+}
+
+type ModifySubApiKeyRes struct {
+	SubName     string `json:"subName"`
+	Permission  string `json:"permission"`
+	IpWhitelist string `json:"ipWhitelist"`
+	ApiKey      string `json:"apiKey"`
+}
+
+// DeleteSubApiKey This endpoint can be used to delete sub-account Futures APIs.
+func (as *ApiService) DeleteSubApiKey(apiKey, passphrase, subName string) (*ApiResponse, error) {
+	p := map[string]string{
+		"apiKey":     apiKey,
+		"passphrase": passphrase,
+		"subName":    subName,
+	}
+	req := NewRequest(http.MethodDelete, "/api/v1/sub/api-key", p)
+	return as.Call(req)
+}
+
+type DeleteSubApiKeyRes struct {
+	ApiKey  string `json:"apiKey"`
+	SubName string `json:"subName"`
 }

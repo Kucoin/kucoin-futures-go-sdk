@@ -4,8 +4,11 @@ import (
 	"net/http"
 )
 
+type PositionsModel []*PositionModel
+
 // A PositionModel represents a position info.
 type PositionModel struct {
+	UserId            string `json:"userId"`
 	Id                string `json:"id"`
 	Symbol            string `json:"symbol"`
 	AutoDeposit       bool   `json:"autoDeposit"`
@@ -57,8 +60,11 @@ func (as *ApiService) Position(symbol string) (*ApiResponse, error) {
 }
 
 // Positions Get Position List.
-func (as *ApiService) Positions() (*ApiResponse, error) {
-	req := NewRequest(http.MethodGet, "/api/v1/positions", nil)
+func (as *ApiService) Positions(currency string) (*ApiResponse, error) {
+	p := map[string]string{
+		"currency": currency,
+	}
+	req := NewRequest(http.MethodGet, "/api/v1/positions", p)
 	return as.Call(req)
 }
 

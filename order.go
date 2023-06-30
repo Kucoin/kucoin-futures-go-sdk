@@ -45,6 +45,17 @@ func (as *ApiService) StopOrders(symbol string) (*ApiResponse, error) {
 	return as.Call(req)
 }
 
+// ObtainStopOrders represents an order.
+func (as *ApiService) ObtainStopOrders(symbol string, page *PaginationParam) (*ApiResponse, error) {
+	p := map[string]string{}
+	if symbol != "" {
+		p["symbol"] = symbol
+	}
+	page.ReadParam(p)
+	req := NewRequest(http.MethodGet, "/api/v1/stopOrders", p)
+	return as.Call(req)
+}
+
 // An OrderModel represents an order.
 type OrderModel struct {
 	Id             string `json:"id"`
@@ -103,7 +114,10 @@ func (as *ApiService) OrderByClientOid(clientOid string) (*ApiResponse, error) {
 }
 
 // RecentDoneOrders returns the recent orders of the latest transactions within 24 hours.
-func (as *ApiService) RecentDoneOrders() (*ApiResponse, error) {
-	req := NewRequest(http.MethodGet, "/api/v1/recentDoneOrders", nil)
+func (as *ApiService) RecentDoneOrders(symbol string) (*ApiResponse, error) {
+	p := map[string]string{
+		"symbol": symbol,
+	}
+	req := NewRequest(http.MethodGet, "/api/v1/recentDoneOrders", p)
 	return as.Call(req)
 }

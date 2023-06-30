@@ -50,6 +50,7 @@ type Level2MessageQueryModel struct {
 type Level2MessageQueryListModel []*Level2MessageQueryModel
 
 // Level2MessageQuery Level 2 Pulling Messages.
+// Deprecated
 func (as *ApiService) Level2MessageQuery(symbol string, start, end int64) (*ApiResponse, error) {
 	req := NewRequest(http.MethodGet, "/api/v1/level2/message/query", map[string]string{
 		"symbol": symbol,

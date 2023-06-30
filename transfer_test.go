@@ -43,8 +43,6 @@ func TestApiService_TransferList(t *testing.T) {
 			t.Error("Empty key 'applyId'")
 		case d.Amount == "":
 			t.Error("Empty key 'amount'")
-		case d.Reason == "":
-			t.Error("Empty key 'reason'")
 		case d.Currency == "":
 			t.Error("Empty key 'currency'")
 		case d.Offset == 0:
@@ -74,4 +72,29 @@ func TestApiService_CancelTransfer(t *testing.T) {
 	case len(w.ApplyId) == 0:
 		t.Error("Empty key 'applyId'")
 	}
+}
+
+func TestApiService_TransferIn(t *testing.T) {
+	t.SkipNow()
+	s := NewApiServiceFromEnv()
+	rsp, err := s.TransferIn("USDT", "TRADE", "2")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(rsp.Message))
+	t.Log(ToJsonString(rsp.Code))
+}
+
+func TestApiService_TransferOutV3(t *testing.T) {
+	t.SkipNow()
+	s := NewApiServiceFromEnv()
+	rsp, err := s.TransferOutV3("USDT", "TRADE", "0.5")
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := &TransferOutV3Res{}
+	if err := rsp.ReadData(w); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(w))
 }

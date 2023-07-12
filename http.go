@@ -2,6 +2,7 @@ package kumex
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"errors"
 	"fmt"
@@ -29,6 +30,14 @@ type Request struct {
 	Header        http.Header
 	Timeout       time.Duration
 	SkipVerifyTls bool
+
+	ctx context.Context
+}
+
+func NewRequestWithContext(ctx context.Context, method, path string, params map[string]string) *Request {
+	r := NewRequest(method, path, params)
+	r.ctx = ctx
+	return r
 }
 
 // NewRequest creates a instance of Request.
@@ -106,6 +115,10 @@ func (r *Request) HttpRequest() (*http.Request, error) {
 	req, err := http.NewRequest(r.Method, r.FullURL(), bytes.NewBuffer(r.Body))
 	if err != nil {
 		return nil, err
+	}
+
+	if r.ctx != nil {
+		req = req.WithContext(r.ctx)
 	}
 
 	for key, values := range r.Header {

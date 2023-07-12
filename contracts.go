@@ -39,8 +39,10 @@ type ContractsModel struct {
 	TurnoverOf24h           float64 `json:"turnoverOf24h"`
 	FundingFeeRate          float64 `json:"fundingFeeRate"`
 	PredictedFundingFeeRate float64 `json:"predictedFundingFeeRate"`
+	FundingRateGranularity  int64   `json:"fundingRateGranularity"`
 	OpenInterest            string  `json:"openInterest"`
 	LastTradePrice          float64 `json:"lastTradePrice"`
+	NextFundingRateTime     int64   `json:"nextFundingRateTime"`
 	LowPrice                float64 `json:"lowPrice"`
 	HighPrice               float64 `json:"highPrice"`
 	PriceChgPct             float64 `json:"priceChgPct"`

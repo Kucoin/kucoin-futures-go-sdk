@@ -118,3 +118,36 @@ type DeleteSubApiKeyRes struct {
 	ApiKey  string `json:"apiKey"`
 	SubName string `json:"subName"`
 }
+
+// SubAccountsBalance Get All Sub-Accounts Balance - Futures
+func (as *ApiService) SubAccountsBalance(currency string) (*ApiResponse, error) {
+	p := map[string]string{
+		"currency": currency,
+	}
+	req := NewRequest(http.MethodGet, "/api/v1/account-overview-all", p)
+	return as.Call(req)
+}
+
+type SubAccountBalanceModel struct {
+	Summary struct {
+		AccountEquityTotal    json.Number `json:"accountEquityTotal"`
+		UnrealisedPNLTotal    json.Number `json:"unrealisedPNLTotal"`
+		MarginBalanceTotal    json.Number `json:"marginBalanceTotal"`
+		PositionMarginTotal   json.Number `json:"positionMarginTotal"`
+		OrderMarginTotal      json.Number `json:"orderMarginTotal"`
+		FrozenFundsTotal      json.Number `json:"frozenFundsTotal"`
+		AvailableBalanceTotal json.Number `json:"availableBalanceTotal"`
+		Currency              string      `json:"currency"`
+	} `json:"summary"`
+	Accounts []struct {
+		AccountName      string      `json:"accountName"`
+		AccountEquity    json.Number `json:"accountEquity"`
+		UnrealisedPNL    json.Number `json:"unrealisedPNL"`
+		MarginBalance    json.Number `json:"marginBalance"`
+		PositionMargin   json.Number `json:"positionMargin"`
+		OrderMargin      json.Number `json:"orderMargin"`
+		FrozenFunds      json.Number `json:"frozenFunds"`
+		AvailableBalance json.Number `json:"availableBalance"`
+		Currency         string      `json:"currency"`
+	} `json:"accounts"`
+}

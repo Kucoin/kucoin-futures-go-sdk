@@ -140,3 +140,20 @@ func TestApiService_DeleteSubApiKey(t *testing.T) {
 	}
 	t.Log(ToJsonString(w))
 }
+
+func TestApiService_SubAccountsBalance(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.SubAccountsBalance("USDT")
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := SubAccountBalanceModel{}
+	if err := rsp.ReadData(&w); err != nil {
+		t.Fatal(err)
+	}
+
+	t.Log(ToJsonString(w.Summary))
+	for _, account := range w.Accounts {
+		t.Log(ToJsonString(account))
+	}
+}

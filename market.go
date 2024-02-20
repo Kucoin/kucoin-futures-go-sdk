@@ -1,6 +1,7 @@
 package kumex
 
 import (
+	"encoding/json"
 	"net/http"
 )
 
@@ -225,5 +226,15 @@ type FundingRateModel struct {
 // FundingRate Get Current Funding Rate.
 func (as *ApiService) FundingRate(Symbol string) (*ApiResponse, error) {
 	req := NewRequest(http.MethodGet, "/api/v1/funding-rate/"+Symbol+"/current", nil)
+	return as.Call(req)
+}
+
+type TradeStatisticsModel struct {
+	TurnoverOf24h json.Number `json:"turnoverOf24h"`
+}
+
+// TradeStatistics Get 24h trade statistics.
+func (as *ApiService) TradeStatistics() (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v1/trade-statistics", nil)
 	return as.Call(req)
 }

@@ -121,3 +121,9 @@ func (as *ApiService) RecentDoneOrders(symbol string) (*ApiResponse, error) {
 	req := NewRequest(http.MethodGet, "/api/v1/recentDoneOrders", p)
 	return as.Call(req)
 }
+
+// CancelOrderClientId  cancel order with order client id
+func (as *ApiService) CancelOrderClientId(clientOid string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v1/orders/client-order/"+clientOid, nil)
+	return as.Call(req)
+}

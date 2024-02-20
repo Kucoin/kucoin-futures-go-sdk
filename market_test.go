@@ -311,3 +311,16 @@ func TestApiService_FundingRate(t *testing.T) {
 		t.Error("Empty key 'predictedValue'")
 	}
 }
+
+func TestApiService_TradeStatistics(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.TradeStatistics()
+	if err != nil {
+		t.Fatal(err)
+	}
+	tk := &TradeStatisticsModel{}
+	if err := rsp.ReadData(tk); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(tk))
+}

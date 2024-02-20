@@ -31,3 +31,19 @@ func TestApiService_FundingHistory(t *testing.T) {
 		}
 	}
 }
+
+func TestApiService_FundingRatesTimeRange(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.FundingRatesTimeRange("XBTUSDTM", "1700310700000", "1702310700000")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	os := FundingTimeRangeRatesModel{}
+	if err := rsp.ReadData(&os); err != nil {
+		t.Fatal(err)
+	}
+	for _, o := range os {
+		t.Log(ToJsonString(o))
+	}
+}

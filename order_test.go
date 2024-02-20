@@ -241,3 +241,18 @@ func TestApiService_StopOrders(t *testing.T) {
 		}
 	}
 }
+
+func TestApiService_CancelOrderClientId(t *testing.T) {
+	t.SkipNow()
+
+	s := NewApiServiceFromEnv()
+	rsp, err := s.CancelOrderClientId("client id")
+	if err != nil {
+		t.Fatal(err)
+	}
+	o := &CancelOrderResultModel{}
+	if err := rsp.ReadData(o); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(o))
+}

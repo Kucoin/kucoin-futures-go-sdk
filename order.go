@@ -122,8 +122,15 @@ func (as *ApiService) RecentDoneOrders(symbol string) (*ApiResponse, error) {
 	return as.Call(req)
 }
 
+type CancelOrderClientIdResultModel struct {
+	ClientOid string `json:"clientOid"`
+}
+
 // CancelOrderClientId  cancel order with order client id
-func (as *ApiService) CancelOrderClientId(clientOid string) (*ApiResponse, error) {
-	req := NewRequest(http.MethodGet, "/api/v1/orders/client-order/"+clientOid, nil)
+func (as *ApiService) CancelOrderClientId(clientOid, symbol string) (*ApiResponse, error) {
+	p := map[string]string{
+		"symbol": symbol,
+	}
+	req := NewRequest(http.MethodDelete, "/api/v1/orders/client-order/"+clientOid, p)
 	return as.Call(req)
 }

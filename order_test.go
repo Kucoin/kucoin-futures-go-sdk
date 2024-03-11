@@ -6,15 +6,18 @@ import (
 )
 
 func TestApiService_CreateOrder(t *testing.T) {
-	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
+	clientId := IntToString(time.Now().UnixNano())
+	t.Log(clientId)
 	p := map[string]string{
-		"clientOid": IntToString(time.Now().UnixNano()),
+		"clientOid": clientId,
 		"side":      "buy",
-		"symbol":    "XBTUSDM",
-		"price":     "0.0036",
+		"symbol":    "XBTUSDTM",
+		"price":     "0.2",
 		"size":      "1",
+		"type":      "limit",
+		"leverage":  "1",
 	}
 	rsp, err := s.CreateOrder(p)
 	if err != nil {
@@ -243,14 +246,13 @@ func TestApiService_StopOrders(t *testing.T) {
 }
 
 func TestApiService_CancelOrderClientId(t *testing.T) {
-	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
-	rsp, err := s.CancelOrderClientId("client id")
+	rsp, err := s.CancelOrderClientId("1709979337447958000", "XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
-	o := &CancelOrderResultModel{}
+	o := &CancelOrderClientIdResultModel{}
 	if err := rsp.ReadData(o); err != nil {
 		t.Fatal(err)
 	}

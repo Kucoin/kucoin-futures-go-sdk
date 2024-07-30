@@ -5,11 +5,10 @@ import (
 )
 
 func TestApiService_AccountOverview(t *testing.T) {
-	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
 	p := map[string]string{}
-	p["currency"] = "XBT"
+	p["currency"] = "USDT"
 
 	rsp, err := s.AccountOverview(p)
 	if err != nil {

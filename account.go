@@ -1,7 +1,7 @@
 package kumex
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"net/http"
 )
 
@@ -65,12 +65,12 @@ func (as *ApiService) SubApiKeys(apiKey, subName string) (*ApiResponse, error) {
 type SubApiKeysModel []*SubApiKeyModel
 
 type SubApiKeyModel struct {
-	SubName     string      `json:"subName"`
-	Remark      string      `json:"remark"`
-	ApiKey      string      `json:"apiKey"`
-	Permission  string      `json:"permission"`
-	IpWhitelist string      `json:"ipWhitelist"`
-	CreatedAt   json.Number `json:"createdAt"`
+	SubName     string          `json:"subName"`
+	Remark      string          `json:"remark"`
+	ApiKey      string          `json:"apiKey"`
+	Permission  string          `json:"permission"`
+	IpWhitelist string          `json:"ipWhitelist"`
+	CreatedAt   jsoniter.Number `json:"createdAt"`
 }
 
 // CreateSubApiKey This endpoint can be used to create Futures APIs for sub-accounts.
@@ -80,14 +80,14 @@ func (as *ApiService) CreateSubApiKey(p map[string]string) (*ApiResponse, error)
 }
 
 type CreateSubApiKeyRes struct {
-	SubName     string      `json:"subName"`
-	Remark      string      `json:"remark"`
-	ApiKey      string      `json:"apiKey"`
-	Permission  string      `json:"permission"`
-	IpWhitelist string      `json:"ipWhitelist"`
-	CreatedAt   json.Number `json:"createdAt"`
-	ApiSecret   string      `json:"apiSecret"`
-	Passphrase  string      `json:"passphrase"`
+	SubName     string          `json:"subName"`
+	Remark      string          `json:"remark"`
+	ApiKey      string          `json:"apiKey"`
+	Permission  string          `json:"permission"`
+	IpWhitelist string          `json:"ipWhitelist"`
+	CreatedAt   jsoniter.Number `json:"createdAt"`
+	ApiSecret   string          `json:"apiSecret"`
+	Passphrase  string          `json:"passphrase"`
 }
 
 // ModifySubApiKey TThis endpoint can be used to modify sub-account Futures APIs.
@@ -130,24 +130,24 @@ func (as *ApiService) SubAccountsBalance(currency string) (*ApiResponse, error) 
 
 type SubAccountBalanceModel struct {
 	Summary struct {
-		AccountEquityTotal    json.Number `json:"accountEquityTotal"`
-		UnrealisedPNLTotal    json.Number `json:"unrealisedPNLTotal"`
-		MarginBalanceTotal    json.Number `json:"marginBalanceTotal"`
-		PositionMarginTotal   json.Number `json:"positionMarginTotal"`
-		OrderMarginTotal      json.Number `json:"orderMarginTotal"`
-		FrozenFundsTotal      json.Number `json:"frozenFundsTotal"`
-		AvailableBalanceTotal json.Number `json:"availableBalanceTotal"`
-		Currency              string      `json:"currency"`
+		AccountEquityTotal    jsoniter.Number `json:"accountEquityTotal"`
+		UnrealisedPNLTotal    jsoniter.Number `json:"unrealisedPNLTotal"`
+		MarginBalanceTotal    jsoniter.Number `json:"marginBalanceTotal"`
+		PositionMarginTotal   jsoniter.Number `json:"positionMarginTotal"`
+		OrderMarginTotal      jsoniter.Number `json:"orderMarginTotal"`
+		FrozenFundsTotal      jsoniter.Number `json:"frozenFundsTotal"`
+		AvailableBalanceTotal jsoniter.Number `json:"availableBalanceTotal"`
+		Currency              string          `json:"currency"`
 	} `json:"summary"`
 	Accounts []struct {
-		AccountName      string      `json:"accountName"`
-		AccountEquity    json.Number `json:"accountEquity"`
-		UnrealisedPNL    json.Number `json:"unrealisedPNL"`
-		MarginBalance    json.Number `json:"marginBalance"`
-		PositionMargin   json.Number `json:"positionMargin"`
-		OrderMargin      json.Number `json:"orderMargin"`
-		FrozenFunds      json.Number `json:"frozenFunds"`
-		AvailableBalance json.Number `json:"availableBalance"`
-		Currency         string      `json:"currency"`
+		AccountName      string          `json:"accountName"`
+		AccountEquity    jsoniter.Number `json:"accountEquity"`
+		UnrealisedPNL    jsoniter.Number `json:"unrealisedPNL"`
+		MarginBalance    jsoniter.Number `json:"marginBalance"`
+		PositionMargin   jsoniter.Number `json:"positionMargin"`
+		OrderMargin      jsoniter.Number `json:"orderMargin"`
+		FrozenFunds      jsoniter.Number `json:"frozenFunds"`
+		AvailableBalance jsoniter.Number `json:"availableBalance"`
+		Currency         string          `json:"currency"`
 	} `json:"accounts"`
 }

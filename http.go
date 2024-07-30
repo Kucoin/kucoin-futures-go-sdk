@@ -32,7 +32,7 @@ type Request struct {
 }
 
 // NewRequest creates a instance of Request.
-func NewRequest(method, path string, params map[string]string) *Request {
+func NewRequest(method, path string, params interface{}) *Request {
 	r := &Request{
 		Method:  method,
 		Path:    path,
@@ -51,17 +51,21 @@ func NewRequest(method, path string, params map[string]string) *Request {
 	return r
 }
 
-func (r *Request) addParams(params map[string]string) {
+func (r *Request) addParams(p interface{}) {
+	if p == nil {
+		return
+	}
 	switch r.Method {
 	case http.MethodGet, http.MethodDelete:
-		for key, value := range params {
+		if v, ok := p.(url.Values); ok {
+			r.Query = v
+			return
+		}
+		for key, value := range p.(map[string]string) {
 			r.Query.Add(key, value)
 		}
 	default:
-		if params == nil {
-			return
-		}
-		b, err := jsoniter.Marshal(params)
+		b, err := jsoniter.Marshal(p)
 		if err != nil {
 			log.Panic("Cannot marshal params to JSON string:", err.Error())
 		}

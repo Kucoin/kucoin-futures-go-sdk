@@ -2,7 +2,6 @@ package kumex
 
 import (
 	"crypto/tls"
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"net/http"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
@@ -123,15 +123,15 @@ func NewUnsubscribeMessage(topic string, privateChannel bool) *WebSocketUnsubscr
 // A WebSocketDownstreamMessage represents a message from the WebSocket server to client.
 type WebSocketDownstreamMessage struct {
 	*WebSocketMessage
-	Sn      string          `json:"sn"`
-	Topic   string          `json:"topic"`
-	Subject string          `json:"subject"`
-	RawData json.RawMessage `json:"data"`
+	Sn      string              `json:"sn"`
+	Topic   string              `json:"topic"`
+	Subject string              `json:"subject"`
+	RawData jsoniter.RawMessage `json:"data"`
 }
 
 // ReadData read the data in channel.
 func (m *WebSocketDownstreamMessage) ReadData(v interface{}) error {
-	return json.Unmarshal(m.RawData, v)
+	return jsoniter.Unmarshal(m.RawData, v)
 }
 
 // A WebSocketClient represents a connection to WebSocket server.

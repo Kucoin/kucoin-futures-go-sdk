@@ -106,3 +106,52 @@ func TestApiService_DepositMargin(t *testing.T) {
 		t.Error("Empty key 'id'")
 	}
 }
+
+func TestApiService_MaxWithdrawMarginV1(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	rsp, err := s.MaxWithdrawMarginV1("XBTUSDTM")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data string
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+
+func TestApiService_WithdrawMarginV1(t *testing.T) {
+
+	s := NewApiServiceFromEnv()
+
+	r := &WithdrawMarginV1Req{
+		Symbol:         "XBTUSDTM",
+		WithdrawAmount: "0.1",
+	}
+	rsp, err := s.WithdrawMarginV1(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data string
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+func TestApiService_GetPositionsHistoryV1(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	r := &GetPositionsHistoryV1Req{
+		Symbol: "PEPEUSDTM",
+	}
+	rsp, err := s.GetPositionsHistoryV1(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	data := GetPositionsHistoryV1Resp{}
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(data))
+}

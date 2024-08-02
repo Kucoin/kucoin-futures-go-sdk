@@ -47,3 +47,17 @@ func TestApiService_FundingRatesTimeRange(t *testing.T) {
 		t.Log(ToJsonString(o))
 	}
 }
+
+func TestApiService_TradeFeesV1(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	rsp, err := s.TradeFeesV1("XBTUSDTM")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	os := TradeFeesV1Resp{}
+	if err := rsp.ReadData(&os); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(os))
+}

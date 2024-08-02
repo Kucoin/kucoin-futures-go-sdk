@@ -1,6 +1,8 @@
 package kumex
 
-import "encoding/json"
+import (
+	"github.com/json-iterator/go"
+)
 
 // A PaginationParam represents the pagination parameters `currentPage` `pageSize` in a request .
 type PaginationParam struct {
@@ -15,14 +17,14 @@ func (p *PaginationParam) ReadParam(params map[string]string) {
 
 // A PaginationModel represents the pagination in a response.
 type PaginationModel struct {
-	CurrentPage int64           `json:"currentPage"`
-	PageSize    int64           `json:"pageSize"`
-	TotalNum    int64           `json:"totalNum"`
-	TotalPage   int64           `json:"totalPage"`
-	RawItems    json.RawMessage `json:"items"` // delay parsing
+	CurrentPage int64               `json:"currentPage"`
+	PageSize    int64               `json:"pageSize"`
+	TotalNum    int64               `json:"totalNum"`
+	TotalPage   int64               `json:"totalPage"`
+	RawItems    jsoniter.RawMessage `json:"items"` // delay parsing
 }
 
 // ReadItems read the `items` into v.
 func (p *PaginationModel) ReadItems(v interface{}) error {
-	return json.Unmarshal(p.RawItems, v)
+	return jsoniter.Unmarshal(p.RawItems, v)
 }

@@ -1,7 +1,7 @@
 package kumex
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"net/http"
 )
 
@@ -230,7 +230,7 @@ func (as *ApiService) FundingRate(Symbol string) (*ApiResponse, error) {
 }
 
 type TradeStatisticsModel struct {
-	TurnoverOf24h json.Number `json:"turnoverOf24h"`
+	TurnoverOf24h jsoniter.Number `json:"turnoverOf24h"`
 }
 
 // TradeStatistics Get 24h trade statistics.

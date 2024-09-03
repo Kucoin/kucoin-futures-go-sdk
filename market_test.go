@@ -6,7 +6,7 @@ import (
 
 func TestApiService_TickerLevel1(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Ticker("XBTUSDM")
+	rsp, err := s.Ticker("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35,7 +35,7 @@ func TestApiService_TickerLevel1(t *testing.T) {
 
 func TestApiService_Level2Snapshot(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Level2Snapshot("XBTUSDM")
+	rsp, err := s.Level2Snapshot("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,7 +62,7 @@ func TestApiService_Level2Snapshot(t *testing.T) {
 
 func TestApiService_Level2MessageQuery(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Level2MessageQuery("XBTUSDM", 1, 20)
+	rsp, err := s.Level2MessageQuery("XBTUSDTM", 1, 20)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -85,7 +85,7 @@ func TestApiService_Level2MessageQuery(t *testing.T) {
 
 func TestApiService_Level3Snapshot(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Level3Snapshot("XBTUSDM")
+	rsp, err := s.Level3Snapshot("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -116,7 +116,7 @@ func TestApiService_Level3Snapshot(t *testing.T) {
 
 func TestApiService_Level3SnapshotV2(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Level3SnapshotV2("XBTUSDM")
+	rsp, err := s.Level3SnapshotV2("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -133,7 +133,7 @@ func TestApiService_Level3SnapshotV2(t *testing.T) {
 
 func TestApiService_Level3MessageQuery(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Level3MessageQuery("XBTUSDM", 1, 20)
+	rsp, err := s.Level3MessageQuery("XBTUSDTM", 1, 20)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +156,7 @@ func TestApiService_Level3MessageQuery(t *testing.T) {
 
 func TestApiService_TradeHistory(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.TradeHistory("XBTUSDM")
+	rsp, err := s.TradeHistory("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +213,7 @@ func TestApiService_InterestQuery(t *testing.T) {
 func TestApiService_IndexQuery(t *testing.T) {
 	s := NewApiServiceFromEnv()
 	p := map[string]string{}
-	p["symbol"] = "XBTUSDM"
+	p["symbol"] = "XBTUSDTM"
 	pp := &PaginationParam{CurrentPage: 1, PageSize: 10}
 	rsp, err := s.IndexQuery(p, pp)
 	if err != nil {
@@ -240,7 +240,7 @@ func TestApiService_IndexQuery(t *testing.T) {
 
 func TestApiService_MarkPrice(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.MarkPrice("XBTUSDM")
+	rsp, err := s.MarkPrice("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +264,7 @@ func TestApiService_MarkPrice(t *testing.T) {
 func TestApiService_PremiumQuery(t *testing.T) {
 	s := NewApiServiceFromEnv()
 	p := map[string]string{}
-	p["symbol"] = "XBTUSDM"
+	p["symbol"] = "XBTUSDTM"
 	pp := &PaginationParam{CurrentPage: 1, PageSize: 10}
 	rsp, err := s.PremiumQuery(p, pp)
 	if err != nil {
@@ -291,7 +291,7 @@ func TestApiService_PremiumQuery(t *testing.T) {
 
 func TestApiService_FundingRate(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.FundingRate(".XBTUSDMFPI8H")
+	rsp, err := s.FundingRate(".XBTUSDTMFPI8H")
 	if err != nil {
 		t.Fatal(err)
 	}

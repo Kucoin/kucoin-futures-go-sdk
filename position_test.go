@@ -9,7 +9,7 @@ func TestApiService_Position(t *testing.T) {
 	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Position("XBTUSDM")
+	rsp, err := s.Position("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -65,7 +65,7 @@ func TestApiService_autoDepositStatus(t *testing.T) {
 
 	s := NewApiServiceFromEnv()
 	p := map[string]string{
-		"symbol": "XBTUSDM",
+		"symbol": "XBTUSDTM",
 		"status": "true",
 	}
 	rsp, err := s.AutoDepositStatus(p)
@@ -88,7 +88,7 @@ func TestApiService_DepositMargin(t *testing.T) {
 
 	s := NewApiServiceFromEnv()
 	p := map[string]string{
-		"symbol": "XBTUSDM",
+		"symbol": "XBTUSDTM",
 		"margin": "0.1111",
 		"bizNo":  IntToString(time.Now().UnixNano()),
 	}

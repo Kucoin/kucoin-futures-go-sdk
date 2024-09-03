@@ -36,7 +36,7 @@ func TestApiService_Contracts(t *testing.T) {
 	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Contracts("XBTUSDM")
+	rsp, err := s.Contracts("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}

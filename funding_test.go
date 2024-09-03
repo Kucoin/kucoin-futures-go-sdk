@@ -4,7 +4,7 @@ import "testing"
 
 func TestApiService_FundingHistory(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.FundingHistory(map[string]string{"symbol": "XBTUSDM"})
+	rsp, err := s.FundingHistory(map[string]string{"symbol": "XBTUSDTM"})
 	if err != nil {
 		t.Fatal(err)
 	}

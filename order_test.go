@@ -293,3 +293,30 @@ func TestApiService_CreateMultiOrders(t *testing.T) {
 	}
 	t.Log(ToJsonString(o))
 }
+
+func TestApiService_CreateSTOrders(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	req := STOrderReq{
+		ClientOid:            IntToString(time.Now().UnixNano()),
+		Side:                 "buy",
+		Symbol:               "XBTUSDM",
+		Leverage:             "20",
+		Type:                 "limit",
+		Price:                "8000",
+		Size:                 1,
+		StopPriceType:        "TP",
+		MarginMode:           "ISOLATED",
+		TriggerStopUpPrice:   "9000",
+		TriggerStopDownPrice: "8000",
+		TimeInForce:          "GTC",
+	}
+	rsp, err := s.CreateSTOrder(&req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	o := &STOrderRes{}
+	if err := rsp.ReadData(o); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(o))
+}

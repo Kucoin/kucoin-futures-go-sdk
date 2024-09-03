@@ -155,3 +155,22 @@ func TestApiService_GetPositionsHistoryV1(t *testing.T) {
 	}
 	t.Log(ToJsonString(data))
 }
+
+func TestApiService_GetMaxOpenSize(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	req := GetMaxOpenSizeReq{}
+	req.Symbol = "PEPEUSDTM"
+	req.Price = "0.0000000001"
+	req.Leverage = "10"
+
+	resp, err := s.GetMaxOpenSize(&req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m := &GetMaxOpenSizeResp{}
+	if err := resp.ReadData(m); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(m))
+}

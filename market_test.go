@@ -324,3 +324,16 @@ func TestApiService_TradeStatistics(t *testing.T) {
 	}
 	t.Log(ToJsonString(tk))
 }
+
+func TestApiService_AllTickers(t *testing.T) {
+	s := NewApiServiceFromEnv()
+	resp, err := s.AllTickers()
+	if err != nil {
+		t.Fatal(err)
+	}
+	m := &AllTickersModel{}
+	if err := resp.ReadData(m); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(m))
+}

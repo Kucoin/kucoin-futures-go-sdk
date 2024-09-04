@@ -258,3 +258,38 @@ func TestApiService_CancelOrderClientId(t *testing.T) {
 	}
 	t.Log(ToJsonString(o))
 }
+
+func TestApiService_CreateMultiOrders(t *testing.T) {
+
+	s := NewApiServiceFromEnv()
+	p := make([]*CreateOrderReq, 0)
+	p = append(p, &CreateOrderReq{
+		ClientOid: IntToString(time.Now().UnixNano()),
+		Side:      "buy",
+		Symbol:    "XBTUSDTM",
+		Leverage:  "1",
+		Type:      "limit",
+		Size:      "1",
+		Price:     "0.3",
+	})
+
+	p = append(p, &CreateOrderReq{
+		ClientOid: IntToString(time.Now().UnixNano()),
+		Side:      "buy",
+		Symbol:    "XBTUSDTM",
+		Leverage:  "1",
+		Type:      "limit",
+		Size:      "1",
+		Price:     "0.2",
+	})
+
+	rsp, err := s.CreateMultiOrders(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	o := &CreateMultiOrdersRes{}
+	if err := rsp.ReadData(o); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(o))
+}

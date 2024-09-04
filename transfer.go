@@ -1,7 +1,7 @@
 package kumex
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"math/big"
 	"net/http"
 )
@@ -88,23 +88,23 @@ func (as *ApiService) TransferOutV3(currency, recAccountType, amount string) (*A
 }
 
 type TransferOutV3Res struct {
-	ApplyId        string      `json:"applyId"`
-	BizNo          string      `json:"bizNo"`
-	PayAccountType string      `json:"payAccountType"`
-	PayTag         string      `json:"payTag"`
-	Remark         string      `json:"remark"`
-	RecAccountType string      `json:"recAccountType"`
-	RecTag         string      `json:"recTag"`
-	RecRemark      string      `json:"recRemark"`
-	RecSystem      string      `json:"recSystem"`
-	Status         string      `json:"status"`
-	Currency       string      `json:"currency"`
-	Amount         string      `json:"amount"`
-	Fee            string      `json:"fee"`
-	Sn             big.Int     `json:"sn"`
-	Reason         string      `json:"reason"`
-	CreatedAt      json.Number `json:"createdAt"`
-	UpdatedAt      json.Number `json:"updatedAt"`
+	ApplyId        string          `json:"applyId"`
+	BizNo          string          `json:"bizNo"`
+	PayAccountType string          `json:"payAccountType"`
+	PayTag         string          `json:"payTag"`
+	Remark         string          `json:"remark"`
+	RecAccountType string          `json:"recAccountType"`
+	RecTag         string          `json:"recTag"`
+	RecRemark      string          `json:"recRemark"`
+	RecSystem      string          `json:"recSystem"`
+	Status         string          `json:"status"`
+	Currency       string          `json:"currency"`
+	Amount         string          `json:"amount"`
+	Fee            string          `json:"fee"`
+	Sn             big.Int         `json:"sn"`
+	Reason         string          `json:"reason"`
+	CreatedAt      jsoniter.Number `json:"createdAt"`
+	UpdatedAt      jsoniter.Number `json:"updatedAt"`
 }
 
 // TransferIn The amount to be transferred will be deducted from the KuCoin Futures Account.

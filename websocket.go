@@ -2,7 +2,6 @@ package kumex
 
 import (
 	"crypto/tls"
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"net/http"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
@@ -131,7 +131,7 @@ type WebSocketDownstreamMessage struct {
 
 // ReadData read the data in channel.
 func (m *WebSocketDownstreamMessage) ReadData(v interface{}) error {
-	return json.Unmarshal(m.RawData, v)
+	return jsoniter.Unmarshal(m.RawData, v)
 }
 
 // A WebSocketClient represents a connection to WebSocket server.

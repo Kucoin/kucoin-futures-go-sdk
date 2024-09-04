@@ -46,3 +46,18 @@ func (as *ApiService) FundingRatesTimeRange(symbol, from, to string) (*ApiRespon
 	})
 	return as.Call(req)
 }
+
+type TradeFeesV1Resp struct {
+	Symbol       string `json:"symbol"`
+	TakerFeeRate string `json:"takerFeeRate"`
+	MakerFeeRate string `json:"makerFeeRate"`
+}
+
+// TradeFeesV1  This interface is for the actual fee rate of the trading pair.
+// The fee rate of your sub-account is the same as that of the master account.
+func (as *ApiService) TradeFeesV1(symbol string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v1/trade-fees", map[string]string{
+		"symbol": symbol,
+	})
+	return as.Call(req)
+}

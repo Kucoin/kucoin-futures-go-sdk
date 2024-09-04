@@ -13,6 +13,12 @@ func (as *ApiService) CreateOrder(params map[string]string) (*ApiResponse, error
 	return as.Call(req)
 }
 
+// CreateOrderTest places a new order.
+func (as *ApiService) CreateOrderTest(params map[string]string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v1/orders/test", params)
+	return as.Call(req)
+}
+
 // A CancelOrderResultModel represents the result of CancelOrder().
 type CancelOrderResultModel struct {
 	CancelledOrderIds []string `json:"cancelledOrderIds"`
@@ -76,7 +82,7 @@ type OrderModel struct {
 	PostOnly       bool   `json:"postOnly"`
 	Hidden         bool   `json:"hidden"`
 	IceBerg        bool   `json:"iceberg"`
-	VisibleSize    string `json:"visibleSize"`
+	VisibleSize    int64  `json:"visibleSize"`
 	Leverage       string `json:"leverage"`
 	ForceHold      bool   `json:"forceHold"`
 	CloseOrder     bool   `json:"closeOrder"`
@@ -132,5 +138,46 @@ func (as *ApiService) CancelOrderClientId(clientOid, symbol string) (*ApiRespons
 		"symbol": symbol,
 	}
 	req := NewRequest(http.MethodDelete, "/api/v1/orders/client-order/"+clientOid, p)
+	return as.Call(req)
+}
+
+type CreateOrderReq struct {
+	// BASE PARAMETERS
+	ClientOid     string `json:"clientOid"`
+	Side          string `json:"side"`
+	Symbol        string `json:"symbol,omitempty"`
+	Leverage      string `json:"leverage,omitempty"`
+	Type          string `json:"type,omitempty"`
+	Remark        string `json:"remark,omitempty"`
+	Stop          string `json:"stop,omitempty"`
+	StopPrice     string `json:"stopPrice,omitempty"`
+	StopPriceType string `json:"stopPriceType,omitempty"`
+	ReduceOnly    string `json:"reduceOnly,omitempty"`
+	CloseOrder    string `json:"closeOrder,omitempty"`
+	ForceHold     string `json:"forceHold,omitempty"`
+	Stp           string `json:"stp,omitempty"`
+
+	// MARKET ORDER PARAMETERS
+	Size string `json:"size,omitempty"`
+
+	// LIMIT ORDER PARAMETERS
+	Price       string `json:"price,omitempty"`
+	TimeInForce string `json:"timeInForce,omitempty"`
+	PostOnly    bool   `json:"postOnly,omitempty"`
+	Hidden      bool   `json:"hidden,omitempty"`
+	IceBerg     bool   `json:"iceberg,omitempty"`
+	VisibleSize string `json:"visibleSize,omitempty"`
+}
+
+type CreateOrderRes struct {
+	OrderId   string `json:"orderId"`
+	ClientOid string `json:"clientOid"`
+	Symbol    string `json:"symbol"`
+}
+type CreateMultiOrdersRes []*CreateOrderRes
+
+// CreateMultiOrders places multi order.
+func (as *ApiService) CreateMultiOrders(p []*CreateOrderReq) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v1/orders/multi", p)
 	return as.Call(req)
 }

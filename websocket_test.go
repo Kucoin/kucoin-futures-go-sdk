@@ -102,9 +102,9 @@ func TestWebSocketClient_Subscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	ch1 := NewSubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
-	ch2 := NewSubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
-	uch := NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
+	ch1 := NewSubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
+	ch2 := NewSubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
+	uch := NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
 
 	if err := c.Subscribe(ch1, ch2); err != nil {
 		t.Fatal(err)
@@ -120,13 +120,13 @@ func TestWebSocketClient_Subscribe(t *testing.T) {
 			t.Log(ToJsonString(msg))
 			i++
 			if i == 5 {
-				t.Log("Unsubscribe XBTUSDM")
+				t.Log("Unsubscribe XBTUSDTM")
 				if err = c.Unsubscribe(uch); err != nil {
 					t.Fatal(err)
 				}
 			}
 			if i == 10 {
-				t.Log("Subscribe XBTUSDM")
+				t.Log("Subscribe XBTUSDTM")
 				if err = c.Subscribe(ch2); err != nil {
 					t.Fatal(err)
 				}

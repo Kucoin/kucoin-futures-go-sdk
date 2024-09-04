@@ -164,9 +164,9 @@ if err != nil {
     return
 }
 
-ch1 := kumex.NewSubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
-ch2 := kumex.NewSubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
-uch := kumex.NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
+ch1 := kumex.NewSubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
+ch2 := kumex.NewSubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
+uch := kumex.NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
 
 if err := c.Subscribe(ch1, ch2); err != nil {
     // Handle error
@@ -191,7 +191,7 @@ for {
         log.Printf("Ticker: %s, %s, %s, %s", msg.Topic, t.Sequence, t.Price, t.Size)
         i++
         if i == 5 {
-            log.Println("Unsubscribe XBTUSDM")
+            log.Println("Unsubscribe XBTUSDTM")
             if err = c.Unsubscribe(uch); err != nil {
                 log.Printf("Error: %s", err.Error())
                 // Handle error
@@ -199,7 +199,7 @@ for {
             }
         }
         if i == 10 {
-            log.Println("Subscribe XBTUSDM")
+            log.Println("Subscribe XBTUSDTM")
             if err = c.Subscribe(ch2); err != nil {
                 log.Printf("Error: %s", err.Error())
                 // Handle error

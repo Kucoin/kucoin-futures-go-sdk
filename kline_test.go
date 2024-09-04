@@ -7,7 +7,7 @@ import (
 
 func TestApiService_KLines(t *testing.T) {
 	s := NewApiServiceFromEnv()
-	rsp, err := s.KLines("XBTUSDM", "5", time.Now().UnixNano()/1e6-7*24*3600, time.Now().UnixNano()/1e6)
+	rsp, err := s.KLines("XBTUSDTM", "5", time.Now().UnixNano()/1e6-7*24*3600, time.Now().UnixNano()/1e6)
 	if err != nil {
 		t.Fatal(err)
 	}

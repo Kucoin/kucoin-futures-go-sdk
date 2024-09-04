@@ -69,7 +69,7 @@ func TestApiService_OpenOrderStatistics(t *testing.T) {
 	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
-	rsp, err := s.OpenOrderStatistics("XBTUSDM")
+	rsp, err := s.OpenOrderStatistics("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}

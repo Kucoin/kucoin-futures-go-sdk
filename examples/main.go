@@ -95,9 +95,9 @@ func publicWebsocket(s *kumex.ApiService) {
 		return
 	}
 
-	ch1 := kumex.NewSubscribeMessage("/contract/instrument:XBTUSDM", false)
-	ch2 := kumex.NewSubscribeMessage("/contractMarket/level3:XBTUSDM", false)
-	//uch := kumex.NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDM", false)
+	ch1 := kumex.NewSubscribeMessage("/contract/instrument:XBTUSDTM", false)
+	ch2 := kumex.NewSubscribeMessage("/contractMarket/level3:XBTUSDTM", false)
+	//uch := kumex.NewUnsubscribeMessage("/contractMarket/ticker:XBTUSDTM", false)
 
 	if err := c.Subscribe(ch1, ch2); err != nil {
 		// Handle error
@@ -138,7 +138,7 @@ func privateWebsocket(s *kumex.ApiService) {
 		return
 	}
 
-	ch1 := kumex.NewSubscribeMessage("/contract/position:XBTUSDM", false)
+	ch1 := kumex.NewSubscribeMessage("/contract/position:XBTUSDTM", false)
 	ch2 := kumex.NewSubscribeMessage("/contractAccount/wallet", false)
 
 	log.Println(kumex.ToJsonString(ch1))

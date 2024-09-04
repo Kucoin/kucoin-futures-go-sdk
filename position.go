@@ -146,3 +146,25 @@ func (as *ApiService) GetPositionsHistoryV1(r *GetPositionsHistoryV1Req) (*ApiRe
 	req := NewRequest(http.MethodGet, "/api/v1/history-positions", v)
 	return as.Call(req)
 }
+
+type GetMaxOpenSizeReq struct {
+	Symbol   string `url:"symbol"`
+	Price    string `url:"price"`
+	Leverage string `url:"leverage"`
+}
+
+type GetMaxOpenSizeResp struct {
+	Symbol          string `json:"symbol"`
+	MaxBuyOpenSize  int    `json:"maxBuyOpenSize"`
+	MaxSellOpenSize int    `json:"leverage"`
+}
+
+// GetMaxOpenSize Get Maximum Open Position Size
+func (as *ApiService) GetMaxOpenSize(r *GetMaxOpenSizeReq) (*ApiResponse, error) {
+	v, err := query.Values(r)
+	if err != nil {
+		return nil, err
+	}
+	req := NewRequest(http.MethodGet, "/api/v2/getMaxOpenSize", v)
+	return as.Call(req)
+}

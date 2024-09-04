@@ -9,7 +9,7 @@ func TestApiService_Position(t *testing.T) {
 	t.SkipNow()
 
 	s := NewApiServiceFromEnv()
-	rsp, err := s.Position("XBTUSDM")
+	rsp, err := s.Position("XBTUSDTM")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -65,7 +65,7 @@ func TestApiService_autoDepositStatus(t *testing.T) {
 
 	s := NewApiServiceFromEnv()
 	p := map[string]string{
-		"symbol": "XBTUSDM",
+		"symbol": "XBTUSDTM",
 		"status": "true",
 	}
 	rsp, err := s.AutoDepositStatus(p)
@@ -88,7 +88,7 @@ func TestApiService_DepositMargin(t *testing.T) {
 
 	s := NewApiServiceFromEnv()
 	p := map[string]string{
-		"symbol": "XBTUSDM",
+		"symbol": "XBTUSDTM",
 		"margin": "0.1111",
 		"bizNo":  IntToString(time.Now().UnixNano()),
 	}
@@ -154,4 +154,23 @@ func TestApiService_GetPositionsHistoryV1(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Log(ToJsonString(data))
+}
+
+func TestApiService_GetMaxOpenSize(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	req := GetMaxOpenSizeReq{}
+	req.Symbol = "PEPEUSDTM"
+	req.Price = "0.0000000001"
+	req.Leverage = "10"
+
+	resp, err := s.GetMaxOpenSize(&req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m := &GetMaxOpenSizeResp{}
+	if err := resp.ReadData(m); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ToJsonString(m))
 }

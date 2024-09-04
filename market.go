@@ -238,3 +238,25 @@ func (as *ApiService) TradeStatistics() (*ApiResponse, error) {
 	req := NewRequest(http.MethodGet, "/api/v1/trade-statistics", nil)
 	return as.Call(req)
 }
+
+type AllTickersModel []TickerItem
+
+type TickerItem struct {
+	Sequence     int64  `json:"sequence"`
+	Symbol       string `json:"symbol"`
+	Side         string `json:"side"`
+	Size         int    `json:"size"`
+	TradeID      string `json:"tradeId"`
+	Price        string `json:"price"`
+	BestBidPrice string `json:"bestBidPrice"`
+	BestBidSize  int    `json:"bestBidSize"`
+	BestAskPrice string `json:"bestAskPrice"`
+	BestAskSize  int    `json:"bestAskSize"`
+	Timestamp    int64  `json:"ts"`
+}
+
+// AllTickers Get Latest Ticker for All Contracts
+func (as *ApiService) AllTickers() (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v1/allTickers", nil)
+	return as.Call(req)
+}

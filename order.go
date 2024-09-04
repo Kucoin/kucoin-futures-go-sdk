@@ -4,7 +4,8 @@ import "net/http"
 
 // A CreateOrderResultModel represents the result of CreateOrder().
 type CreateOrderResultModel struct {
-	OrderId string `json:"orderId"`
+	OrderId   string `json:"orderId"`
+	ClientOid string `json:"clientOid"`
 }
 
 // CreateOrder places a new order.
@@ -179,5 +180,40 @@ type CreateMultiOrdersRes []*CreateOrderRes
 // CreateMultiOrders places multi order.
 func (as *ApiService) CreateMultiOrders(p []*CreateOrderReq) (*ApiResponse, error) {
 	req := NewRequest(http.MethodPost, "/api/v1/orders/multi", p)
+	return as.Call(req)
+}
+
+type STOrderReq struct {
+	ClientOid            string `json:"clientOid"`
+	Side                 string `json:"side"`
+	Symbol               string `json:"symbol"`
+	Leverage             string `json:"leverage"`
+	Type                 string `json:"type"`
+	Remark               string `json:"remark"`
+	TriggerStopUpPrice   string `json:"triggerStopUpPrice"`
+	StopPriceType        string `json:"stopPriceType"`
+	TriggerStopDownPrice string `json:"triggerStopDownPrice"`
+	ReduceOnly           bool   `json:"reduceOnly"`
+	CloseOrder           bool   `json:"closeOrder"`
+	ForceHold            bool   `json:"forceHold"`
+	Stp                  string `json:"stp"`
+	Price                string `json:"price"`
+	Size                 int    `json:"size"`
+	TimeInForce          string `json:"timeInForce"`
+	PostOnly             bool   `json:"postOnly"`
+	Hidden               bool   `json:"hidden"`
+	Iceberg              bool   `json:"iceberg"`
+	VisibleSize          int    `json:"visibleSize"`
+	MarginMode           string `json:"marginMode"`
+}
+
+type STOrderRes struct {
+	OrderId   string `json:"orderId"`
+	ClientOid string `json:"clientOid"`
+}
+
+// CreateSTOrder Place take profit and stop loss order
+func (as *ApiService) CreateSTOrder(p *STOrderReq) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v1/st-orders", p)
 	return as.Call(req)
 }

@@ -123,10 +123,10 @@ func NewUnsubscribeMessage(topic string, privateChannel bool) *WebSocketUnsubscr
 // A WebSocketDownstreamMessage represents a message from the WebSocket server to client.
 type WebSocketDownstreamMessage struct {
 	*WebSocketMessage
-	Sn      string              `json:"sn"`
-	Topic   string              `json:"topic"`
-	Subject string              `json:"subject"`
-	RawData jsoniter.RawMessage `json:"data"`
+	Sn      int64           `json:"sn"`
+	Topic   string          `json:"topic"`
+	Subject string          `json:"subject"`
+	RawData json.RawMessage `json:"data"`
 }
 
 // ReadData read the data in channel.
@@ -192,7 +192,7 @@ func (wc *WebSocketClient) Connect() (<-chan *WebSocketDownstreamMessage, <-chan
 	websocket.DefaultDialer.TLSClientConfig = &tls.Config{InsecureSkipVerify: wc.skipVerifyTls}
 
 	// Connect ws server
-	websocket.DefaultDialer.ReadBufferSize = 2048000 //2000 kb
+	websocket.DefaultDialer.ReadBufferSize = 2048000 // 2000 kb
 	wc.conn, _, err = websocket.DefaultDialer.Dial(u, nil)
 	if err != nil {
 		return wc.messages, wc.errors, err
@@ -313,10 +313,10 @@ func (wc *WebSocketClient) Subscribe(channels ...*WebSocketSubscribeMessage) err
 		if err := wc.conn.WriteMessage(websocket.TextMessage, []byte(m)); err != nil {
 			return err
 		}
-		//log.Printf("Subscribing: %s, %s", c.Id, c.Topic)
+		// log.Printf("Subscribing: %s, %s", c.Id, c.Topic)
 		select {
 		case id := <-wc.acks:
-			//log.Printf("ack: %s=>%s", id, c.Id)
+			// log.Printf("ack: %s=>%s", id, c.Id)
 			if id != c.Id {
 				return errors.Errorf("Invalid ack id %s, expect %s", id, c.Id)
 			}
@@ -339,10 +339,10 @@ func (wc *WebSocketClient) Unsubscribe(channels ...*WebSocketUnsubscribeMessage)
 		if err := wc.conn.WriteMessage(websocket.TextMessage, []byte(m)); err != nil {
 			return err
 		}
-		//log.Printf("Unsubscribing: %s, %s", c.Id, c.Topic)
+		// log.Printf("Unsubscribing: %s, %s", c.Id, c.Topic)
 		select {
 		case id := <-wc.acks:
-			//log.Printf("ack: %s=>%s", id, c.Id)
+			// log.Printf("ack: %s=>%s", id, c.Id)
 			if id != c.Id {
 				return errors.Errorf("Invalid ack id %s, expect %s", id, c.Id)
 			}

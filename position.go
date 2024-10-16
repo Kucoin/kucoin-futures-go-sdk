@@ -48,6 +48,10 @@ type PositionModel struct {
 	SettleCurrency    string `json:"settleCurrency"`
 	MaintainMargin    string `json:"maintainMargin"`
 	RiskLimitLevel    string `json:"riskLimitLevel"`
+	MarginMode        string `json:"marginMode"`
+	PositionSide      string `json:"positionSide"`
+	Leverage          string `json:"leverage"`
+	PosFunding        string `json:"posFunding"`
 }
 
 // Position Get Position Details.
@@ -78,6 +82,40 @@ func (as *ApiService) AutoDepositStatus(params map[string]string) (*ApiResponse,
 // DepositMargin Add Margin Manually.
 func (as *ApiService) DepositMargin(params map[string]string) (*ApiResponse, error) {
 	req := NewRequest(http.MethodPost, "/api/v1/position/margin/deposit-margin", params)
+	return as.Call(req)
+}
+
+type MarginModeModel struct {
+	Symbol     string `json:"symbol"`     //symbol of the contract
+	MarginMode string `json:"marginMode"` //Margin mode: ISOLATED (isolated), CROSS (cross margin).
+}
+
+// GetMarginMode can query the margin mode of the current symbol.
+func (as *ApiService) GetMarginMode(symbol string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v2/position/getMarginMode", map[string]string{"symbol": symbol})
+	return as.Call(req)
+}
+
+// ChangeMarginMode modify the margin mode of the current symbol
+func (as *ApiService) ChangeMarginMode(symbol string, marginMode string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v2/position/changeMarginMode", map[string]string{"symbol": symbol, "marginMode": marginMode})
+	return as.Call(req)
+}
+
+type MarginUserLeverage struct {
+	Symbol   string `json:"symbol"`   //symbol of the contract
+	Leverage string `json:"leverage"` //Leverage multiple
+}
+
+// GetCrossUserLeverage query the current symbol’s cross-margin leverage multiple
+func (as *ApiService) GetCrossUserLeverage(symbol string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodGet, "/api/v2/getCrossUserLeverage", map[string]string{"symbol": symbol})
+	return as.Call(req)
+}
+
+// ChangeCrossUserLeverage  modify the current symbol’s cross-margin leverage multiple
+func (as *ApiService) ChangeCrossUserLeverage(symbol string, leverage string) (*ApiResponse, error) {
+	req := NewRequest(http.MethodPost, "/api/v2/changeCrossUserLeverage", map[string]string{"symbol": symbol, "leverage": leverage})
 	return as.Call(req)
 }
 

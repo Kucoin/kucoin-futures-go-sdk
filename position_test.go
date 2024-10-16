@@ -107,6 +107,62 @@ func TestApiService_DepositMargin(t *testing.T) {
 	}
 }
 
+func TestApiService_GetMarginMode(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	rsp, err := s.GetMarginMode("XBTUSDTM")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data MarginModeModel
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+
+func TestApiService_ChangeMarginMode(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	rsp, err := s.ChangeMarginMode("XBTUSDTM", "CROSS")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data MarginModeModel
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+
+func TestApiService_GetCrossUserLeverage(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	rsp, err := s.GetCrossUserLeverage("XBTUSDTM")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data MarginUserLeverage
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+
+func TestApiService_ChangeCrossUserLeverage(t *testing.T) {
+	s := NewApiServiceFromEnv()
+
+	rsp, err := s.ChangeCrossUserLeverage("XBTUSDTM", "6")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data bool
+	if err := rsp.ReadData(&data); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+}
+
 func TestApiService_MaxWithdrawMarginV1(t *testing.T) {
 	s := NewApiServiceFromEnv()
 

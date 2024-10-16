@@ -24,6 +24,7 @@ type FillModel struct {
 	TradeTime      int64   `json:"tradeTime"`
 	OpenFeePay     string  `json:"openFeePay"`
 	CloseFeePay    string  `json:"closeFeePay"`
+	MarginMode     string  `json:"marginMode"`
 }
 
 // A FillsModel is the set of *FillModel.

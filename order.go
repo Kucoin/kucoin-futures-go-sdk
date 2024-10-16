@@ -96,6 +96,7 @@ type OrderModel struct {
 	UpdatedAt      int64  `json:"updatedAt"`
 	SettleCurrency string `json:"settleCurrency"`
 	Status         string `json:"status"`
+	MarginMode     string `json:"marginMode"`
 }
 
 // A OrdersModel is the set of *OrderModel.
@@ -157,6 +158,7 @@ type CreateOrderReq struct {
 	CloseOrder    string `json:"closeOrder,omitempty"`
 	ForceHold     string `json:"forceHold,omitempty"`
 	Stp           string `json:"stp,omitempty"`
+	MarginMode    string `json:"marginMode,omitempty"` // Margin mode: ISOLATED, CROSS, default: ISOLATED
 
 	// MARKET ORDER PARAMETERS
 	Size string `json:"size,omitempty"`
